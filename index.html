@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>WSDL To Swagger</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.8.0/css/bulma.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+    <style>
+    .center {
+      margin: 0;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      -ms-transform: translate(-50%, -50%);
+      transform: translate(-50%, -50%);
+    }
+    </style>
+  </head>
+  <body>
+
+  <section class="hero is-dark">
+    <div class="hero-head">
+      <header class="navbar">
+        <div class="container ">
+          <div class="navbar-brand">
+            <a href="/" class="navbar-item">
+              <span class="icon">
+                <i class="far fa-folder-open"></i>
+              </span>
+              <span>wsdl2swagger</span>
+            </a>
+            <a role="button" class="navbar-burger burger" data-target="navbarMenuHeroC" aria-label="menu" aria-expanded="false">
+              <span></span>
+              <span></span>
+              <span></span>
+            </a>
+          </div>
+          <div id="navbarMenuHeroC" class="navbar-menu">
+            <div class="navbar-end">
+              <a href="" class="navbar-item is-active">
+                <span class="icon">
+                  <i class="fas fa-home"></i>
+                </span>
+                <span>Home</span>
+              </a>
+              <a href="https://github.com/abhijeetsatpute/wsdlToYaml" class="navbar-item">
+                  <span class="icon">
+                    <i class="fab fa-github"></i>
+                  </span>
+                  <span>Github</span>
+              </a>
+            </div>
+          </div>
+        </div>
+      </header>
+    </div>
+
+    <figure class="image is-128x128 container">
+      <img src="./view/icon.png" alt="image" border="0"><br>
+    </figure>
+
+        <div class="container hero-body">
+          <div class="container">
+            <h1 style="font-size:45px;" class="title">
+              WSDL To Swagger
+            </h1>
+            <h2 class="subtitle">
+              Convert WSDL to Swagger v2.0 YAML
+            </h2>
+          </div>
+        </div>
+
+        
+  </section>
+
+  <section class="hero">
+      <div class="container hero-body">
+          <form class="container" method="POST" action="/">
+            <input class="input is-primary" type="text" placeholder="Primary input" name="PathToWsdl">
+              <br><br><br>
+              <div class="container is-grouped">
+                  <div class="control center">
+                      <button class="button is-large is-success is-focused is-rounded " type="submit" value="Convert">
+                        <span>Convert</span>
+                        <span class="icon is-small">
+                          <i class="fas fa-cog"></i>
+                        </span>
+                      </button>
+                  </div>
+              </div>
+          </form>
+      </div>
+
+  </section>
+
+  </body>
+
+  <script src="./view/main.js"></script>
+</html>
