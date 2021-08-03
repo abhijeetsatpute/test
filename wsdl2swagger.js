@@ -1,30 +1,30 @@
 var apiconnWsdl = require("apiconnect-wsdl");
 var yaml 	    = require("js-yaml");
 var fs          = require("file-system");
+const _ = require('lodash');
+//mixin all the methods into Lodash object
+require('deepdash')(_);
 
 async function wsdl2swagger(input){
 	try {
-		var wsdls = await apiconnWsdl.getJsonForWSDL(input);
-		var filename = input.split('/').slice(-1)[0];
-		// Get Services from all parsed WSDLs
-		var serviceData = apiconnWsdl.getWSDLServices(wsdls);
-		// Loop through all services and genereate yaml file
-		for (var  item in serviceData.services) {
+			var wsdls = await apiconnWsdl.getJsonForWSDL(input);
+			var filename = input.split('/').slice(-1)[0];
+			// Get Services from all parsed WSDLs
+			var serviceData = apiconnWsdl.getWSDLServices(wsdls);
+
+			// Loop through all services and genereate yaml file
+			for (var item in serviceData.services) {
 			var serviceName = serviceData.services[item].service;
 			var wsdlId = serviceData.services[item].filename;
-			var wsdlEntry = await apiconnWsdl.findWSDLForServiceName(wsdls, serviceName);
-			var swaggerOptions = {
-				suppressExamples: !wsdls.examples,
-				wssecurity: false
-			}
+			var wsdlEntry = apiconnWsdl.findWSDLForServiceName(wsdls, serviceName);
 			var swagger = apiconnWsdl.getSwaggerForService(
 				wsdlEntry,
-				serviceName, 
-				wsdlId, 
-				swaggerOptions
+				serviceName,
+				wsdlId
 			);
-			delete swagger.info['x-ibm-name']
-			delete swagger['x-ibm-configuration']
+			swagger = _.omitDeep(swagger, /\.?(example|x-ibm|xml|x-xsi-type)/);
+			swagger.produces = ['application/json'];
+			swagger.consumes = ['text/json'];
 			fs.writeFile("./converted/"+filename.split('.')[0]+".yaml", modify(yaml.safeDump(swagger)));
 		}
 	} catch (err) {
@@ -85,5 +85,7 @@ function modify(swagger){
 
 	return lines.join('\n');
 }
+
+//wsdl2swagger('C:/Users/abhij/Desktop/wsdl/samples/nest/3.wsdl');
 
 exports.wsdl2swagger = wsdl2swagger;
